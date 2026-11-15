@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ejercicios de la sesión 5 de Lenguaje, Pensamiento y Cognición Visual.">
+  <title>NasaSpace2026</title>
+  <style>
+    /* ===== Variables y base ===== */
+    :root {
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #202b3d;
+      background: #e7e7e7;
+      --red: #9e1737;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      background: #e7e7e7;
+    }
+
+    /* ===== Encabezado ===== */
+    .topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px max(24px, calc((100% - 1200px) / 2));
+      background: var(--red);
+      border-bottom: 5px solid #5c0c24;
+      box-shadow: 0 5px 14px rgba(63, 7, 27, .25);
+    }
+
+    .identity { display: flex; align-items: center; gap: 12px; }
+
+    .identity img {
+      width: 58px;
+      height: 66px;
+      object-fit: contain;
+      filter: drop-shadow(0 3px 5px rgba(40, 0, 15, .35));
+      transition: transform .28s ease, filter .28s ease;
+    }
+
+    .identity img:hover {
+      transform: translateY(-4px) rotate(-3deg) scale(1.05);
+      filter: drop-shadow(0 7px 8px rgba(40, 0, 15, .42));
+    }
+
+    .identity__name {
+      color: #fff;
+      font-size: 17px;
+      font-weight: 850;
+      letter-spacing: .06em;
+      line-height: 1.15;
+      text-transform: uppercase;
+      -webkit-text-stroke: 3px #430818;
+      paint-order: stroke fill;
+      filter: drop-shadow(2px 3px 3px rgba(35, 0, 12, .55));
+    }
+
+    .nasa-logo {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      filter: drop-shadow(0 3px 5px rgba(40, 0, 15, .35));
+      transition: transform .28s ease, filter .28s ease;
+    }
+
+    .nasa-logo:hover {
+      transform: translateY(-4px) rotate(4deg) scale(1.06);
+      filter: drop-shadow(0 7px 8px rgba(40, 0, 15, .42));
+    }
+
+    /* ===== Contenido principal ===== */
+    main {
+      width: min(100% - 32px, 1200px);
+      flex: 1;
+      display: flex;
+      align-items: center;
+      margin: 16px auto;
+    }
+
+    .cover {
+      width: 100%;
+      padding: 6px 20px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      text-align: center;
+      box-shadow: none;
+    }
+
+    .cover h1 {
+      margin: 0;
+      color: #17243c;
+      font-size: clamp(28px, 2.4vw, 46px);
+      letter-spacing: -.04em;
+      line-height: 1.15;
+      text-shadow: 0 3px 6px rgba(0, 0, 0, .28);
+    }
+
+    .cover__session {
+      display: block;
+      margin: 5px 0 1.5em;
+      color: #9e1737;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .language-label {
+      display: table;
+      margin: -1.1em auto 1em;
+      padding: 6px 15px;
+      border: 1px solid rgba(158, 23, 55, .35);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, .58);
+      color: #9e1737;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      box-shadow: 0 3px 8px rgba(23, 36, 60, .1);
+    }
+
+    .cover__details { display: grid; gap: 6px; margin: 0; }
+    .cover__details div { margin: 0; }
+
+    .project-description {
+      width: 100%;
+      margin: 8px auto 12px;
+      padding: 0;
+      color: #17243c;
+      font-size: clamp(14px, 1vw, 17px);
+      line-height: 1.45;
+      text-align: justify;
+      text-align-last: center;
+      overflow-wrap: anywhere;
+    }
+
+    .cover__details dt {
+      margin-bottom: 2px;
+      color: #677b95;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .cover__details dd {
+      margin: 0;
+      color: #17243c;
+      font-size: clamp(17px, 1.15vw, 22px);
+      font-weight: 600;
+      line-height: 1.3;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .project-actions {
+      display: grid;
+      grid-template-columns: minmax(240px, .8fr) minmax(0, 1.6fr);
+      align-items: center;
+      gap: 18px;
+      margin-top: 1.5em;
+    }
+
+    .cover__links {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .project-video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      border-radius: 12px;
+      background: #111;
+      box-shadow: 0 6px 15px rgba(29, 74, 139, .2);
+    }
+
+    .cover__links a {
+      display: block;
+      padding: 16px 20px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #3269b4, #214e91);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 6px 15px rgba(29, 74, 139, .2);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .cover__links a:hover {
+      transform: translateY(-3px);
+      background: #173f7c;
+      box-shadow: 0 10px 20px rgba(29, 74, 139, .27);
+    }
+
+    .cover__links a:focus-visible { outline: 3px solid #bc2435; outline-offset: 4px; }
+
+    .cover__session,
+    .cover__details dt,
+    .cover__details dd { text-shadow: 0 2px 3px rgba(23, 36, 60, .22); }
+
+    .cover__links a { text-shadow: 0 1px 2px rgba(18, 45, 85, .45); }
+
+    .access-note {
+      grid-column: 1 / -1;
+      padding: 12px 14px;
+      border: 1px solid #c8d8e8;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .72);
+      color: #344b66;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    .access-note strong { color: #17243c; }
+    .access-note p { margin: 0; }
+    .access-note p + p { margin-top: 5px; }
+
+    /* ===== Pie de página ===== */
+    footer {
+      padding: 21px 20px;
+      background: var(--red);
+      color: #fff;
+      font-size: clamp(13px, 1.1vw, 16px);
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-align: center;
+      text-shadow: 0 2px 4px rgba(45, 0, 16, .55);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 640px) {
+      .topline { padding: 13px 18px; }
+      main { margin-top: 20px; }
+    }
+
+    @media (max-width: 430px) {
+      .topline { padding: 12px 14px; }
+      .identity { gap: 9px; }
+      .identity img { width: 47px; height: 54px; }
+      .identity__name { font-size: 13px; }
+      .nasa-logo { width: 48px; height: 48px; }
+      main { width: min(100% - 20px, 620px); margin: 20px auto; }
+      .cover { padding: 10px 5px; }
+      .cover h1 { font-size: clamp(25px, 7vw, 30px); }
+      .cover__details dd { font-size: 16px; }
+      .project-description { margin: 8px auto 12px; padding: 0 4px; font-size: 14px; line-height: 1.4; }
+      .cover__session { margin-bottom: 1.2em; font-size: 12px; }
+      .project-actions { grid-template-columns: 1fr; gap: 14px; margin-top: 1.2em; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topline">
+    <div class="identity">
+      <img src="imagenes/INSIGNIA_UPRIT.png" alt="Insignia UPRIT">
+      <div class="identity__name">Universidad Privada<br>de Trujillo</div>
+    </div>
+    <img class="nasa-logo" src="imagenes/nasa-insignia.svg" alt="NASA insignia">
+  </header>
+
+  <main>
+    <section class="cover" aria-labelledby="page-title">
+      <h1 id="page-title">Challenge Name</h1>
+      <p class="cover__session">Create health monitoring software for astronauts on space missions.</p>
+      <div class="language-label">Presentation</div>
+
+      <p class="project-description">WallkiHealth means “Health Companion.” Its name is inspired by <em>Wallki</em>, a word associated with companionship in the Ancash variety of Central Quechua, an Indigenous language of Peru.<br><br>WallkiHealth is an educational, AI-assisted platform designed to support astronaut health during long-duration space missions. It integrates daily vital-sign monitoring, health records, personalized preventive guidance, medical follow-up, and early alerts into one accessible system.<br><br>By monitoring heart rate, oxygen levels, blood pressure, sleep, stress, and radiation exposure, WallkiHealth helps astronauts and medical teams identify potential health changes and make informed decisions.<br><br>Developed independently in Peru, WallkiHealth combines artificial intelligence, technology, and Andean cultural inspiration with one purpose: to be a trusted health companion for astronauts beyond Earth.</p>
+
+      <dl class="cover__details" aria-label="Datos de la actividad">
+        <div><dt>Individual Participant</dt><dd>IVAN TEODOLIO MOYA HUAYTAN</dd></div>
+      </dl>
+
+      <div class="project-actions">
+        <nav class="cover__links" aria-label="Project links">
+          <a href="https://wallkihealth.itemhrm.com/" target="_blank" rel="noopener noreferrer">View Live Project</a>
+          <a href="https://drive.google.com/drive/folders/183_3272Lon6mJoMuj_1vVOP31roTAXj6?usp=sharing" target="_blank" rel="noopener noreferrer">Download Project</a>
+          <a href="presentacion.html" target="_blank" rel="noopener noreferrer">Video Presentation</a>
+        </nav>
+        <iframe class="project-video" src="https://drive.google.com/file/d/1DQQT1LCVMpbh5-lRPrQkfwbhI1Xv2mW1/preview" title="WallkiHealth project video" allow="autoplay" allowfullscreen></iframe>
+        <aside class="access-note" aria-label="Project access information">
+          <p><strong>Demonstration access</strong></p>
+          <p><strong>Master administrator:</strong> Username <strong><code>admin</code></strong> · Password <strong><code>adminmed</code></strong></p>
+          <p><strong>Google sign-in:</strong> You can also sign in with a Google account already open in Gmail.</p>
+          <p><strong>Google access:</strong> The account limit is managed in <em>Settings</em>. Administrators can create invitations in <em>Users</em>, valid for up to 30 days.</p>
+          <p><strong>User accounts:</strong> Administrators can create Administrator, Physician, and Crew Member accounts in <em>Users</em>. Creating a Crew Member account also adds that person to the crew list.</p>
+          <p><strong>Crew:</strong> Use <em>Register Astronaut</em> to add a profile without an account. Deleting a user also deletes its linked crew profile and health records.</p>
+          <p><strong>To see the project in action:</strong> Click <em>View Live Project</em>.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>It's a pleasure to participate! Thank you! @ UPRIT - PERÚ</footer>
+</body>
+</html>
